@@ -1,0 +1,100 @@
+
+Clean Architecture is a software architecture pattern that promotes separation of concerns and aims to create a 
+maintainable, scalable, and testable codebase.
+
+1. Separation of Concerns:
+
+Clean Architecture advocates for organizing your codebase into distinct layers, with each layer having a specific 
+responsibility and dependency flow. The key layers in Clean Architecture are typically:
+
+Entities: Represent core business objects or domain entities.
+
+Use Cases (Interactors): Contain application-specific business rules and use cases, independent of external frameworks
+ or delivery mechanisms.
+ 
+Interface Adapters: Convert data from external sources (such as UI, databases, or external services) into formats usable
+by the use cases and vice versa.
+
+Frameworks and Drivers: Consist of external frameworks, tools, and delivery mechanisms such as web frameworks, 
+databases, UIs, etc.
+
+2. Dependency Rule (Dependency Inversion Principle):
+
+Clean Architecture promotes the Dependency Inversion Principle (DIP), which states that high-level modules should not 
+depend on low-level modules but rather both should depend on abstractions. This is achieved by defining interfaces or 
+abstractions for dependencies, allowing different implementations to be easily swapped without affecting the core logic.
+
+
+3. Business Rules at the Core:
+
+Clean Architecture prioritizes keeping core business rules and use cases at the center of the architecture. This ensures 
+that the application's primary functionality remains decoupled from implementation details and external concerns.
+
+4. Ease of Change and Maintenance:
+
+The architecture should facilitate making changes to the system without affecting other parts. When requirements change
+ or new features need to be added, Clean Architecture encourages making modifications within the appropriate layer while 
+ minimizing impact on the rest of the system.
+
+5. UI Independence:
+
+Clean Architecture suggests that the business logic and use cases should be independent of the user interface (UI). This allows 
+for multiple UIs (such as web, mobile, CLI) to interact with the same core application logic without affecting it.
+
+
+Let's break down the provided code structure and map it to the Clean Architecture layers:
+
+>> Entities (Core Business Logic):
+
+Task class in the com.example.domain package represents the core business entity. It defines the attributes and behavior 
+of a task in your application.
+
+>> Use Cases (Application Service Layer):
+
+TaskCommandService and TaskQueryService in the com.example.application.command and com.example.application.query 
+packages respectively represent use cases or application-specific business logic.
+
+These services contain methods such as createTask, deleteTaskById, getAllTasks, and getTaskById that encapsulate business 
+rules related to task creation, deletion, and retrieval.
+
+>> Interface Adapters (Web Layer):
+
+TaskCommandController and TaskQueryController in the com.example.web.command and com.example.web.query packages 
+respectively act as interface adapters.
+
+These controllers handle incoming HTTP requests and serve as an interface between the external world (clients, web browsers) 
+and the application's use cases.
+
+The TaskRequest class in the com.example.web.command package serves as a DTO (Data Transfer Object) for receiving task 
+creation requests from clients. It represents an interface-specific data structure that adapts incoming data into a format 
+usable by the application's use cases.
+
+>> Frameworks and Drivers (Infrastructure Layer):
+
+TaskRepository and TaskRepositoryImpl in the com.example.infrastructure.persistence package form part of the infrastructure layer.
+
+TaskRepository is an interface that defines operations for data persistence related to tasks, such as save, findById, findAll, and deleteById.
+
+TaskRepositoryImpl provides a concrete implementation of the repository using an in-memory storage mechanism (List<Task> in this case). 
+It handles the actual data storage and retrieval operations.
+
+In a real-world scenario, frameworks and drivers such as databases (e.g., JDBC, JPA), external services, or other external tools can be 
+integrated into this layer.By structuring the code in this way, we  align with Clean Architecture principles:
+
+Core business logic (entities and use cases) is kept separate from interface-related code (controllers, DTOs) and infrastructure-related code 
+(data storage, external services).
+
+Dependencies flow inward, with higher-level layers (use cases) depending on lower-level layers (entities, repositories) through abstractions 
+(interfaces).
+
+The architecture remains flexible and testable, as each layer can be tested independently with appropriate mocks and stubs.
+
+Changes in external frameworks or UI components can be handled without affecting the core business logic, promoting maintainability 
+and scalability.
+
+
+
+
+
+
+

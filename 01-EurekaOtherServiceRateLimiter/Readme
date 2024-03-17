@@ -1,0 +1,6 @@
+limitRereshPeriod is the interval – in our case it is 5 seconds
+
+limitForPeriod is number of requests to make every 5 seconds. In our case, it should be just 1.  
+We want to make only one call every 5 second. All other requests should not be allowed within the 5 second window
+
+timeoutDuration – additional requests within the 5 seconds should be timedout immediately.

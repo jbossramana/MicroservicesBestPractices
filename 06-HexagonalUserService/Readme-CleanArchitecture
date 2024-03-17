@@ -1,0 +1,55 @@
+Clean Architecture pattern, which emphasizes the separation of concerns and dependency flow. Here's an explanation 
+of each component:
+
+Entities:
+
+Entities represent the core business objects and encapsulate enterprise-wide business rules.
+
+In the Clean Architecture, entities are at the core of the system and are independent of any external frameworks or technologies.
+
+Use Cases (Interactors):
+
+Use cases encapsulate application-specific business rules and orchestrate the flow of data between entities and interfaces.
+They represent the application's behavior and define what the system does in response to external requests.
+In the Clean Architecture, use cases are at the center of the system and are independent of external details such as frameworks or UI.
+
+Interface Adapters:
+
+Interface adapters convert data from the format most convenient for the use cases and entities into the format most convenient for 
+external agencies such as databases and web frameworks.
+
+They communicate between the use cases and external systems, translating data and events as necessary.
+
+In the Clean Architecture, interface adapters include controllers, presenters, gateways, and other external dependencies.
+
+Frameworks & Drivers:
+
+Frameworks and drivers are the outermost layer of the system and consist of all the external components such as web frameworks, 
+databases, UI, and external libraries.
+
+They are implementation details and can be replaced without affecting the core business logic of the system.
+
+In the Clean Architecture, the inner layers are independent of the outer layers, and dependencies only flow inward toward the core.
+
+Components in the diagram:
+
+Use Cases (Interactors):
+
+UserServiceInteractor represents the use case responsible for user-related operations such as creating, updating, retrieving, 
+and deleting users.
+
+Entities:
+
+User represents the core entity in the system, containing attributes and behaviors related to users.
+
+Interface Adapters:
+
+UserRepositoryAdapter serves as the interface adapter responsible for interacting with the database (e.g., using Spring Data JPA) to 
+perform CRUD operations on users.
+
+Frameworks & Drivers:
+
+This layer includes REST controllers, database components, and external libraries. It's responsible for handling external interactions 
+and providing infrastructure support for the application.
+
+

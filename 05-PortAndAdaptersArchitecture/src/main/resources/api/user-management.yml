@@ -1,0 +1,181 @@
+openapi: 3.0.3
+info:
+  title: Swagger UserManagement - OpenAPI 3.0
+  description:
+    This is a sample user management server based on the OpenAPI 3.0 specification.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+tags:
+  - name: user
+    description: Operations about user
+paths:
+  /user:
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: Submit a new user
+      operationId: submitUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitNewUserDTO'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+        '400':
+          description: User name is already taken | invalid request body
+    get:
+      tags:
+        - user
+      summary: Get all users
+      description: ''
+      operationId: getUsers
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDTO'
+  /user/{userName}:
+    get:
+      tags:
+        - user
+      summary: Get user by user name
+      description: ''
+      operationId: getUserByUserName
+      parameters:
+        - name: userName
+          in: path
+          description: 'The name that needs to be fetched. '
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+    delete:
+      tags:
+        - user
+      summary: Delete user by user name
+      description: Delete user by user name
+      operationId: deleteUser
+      parameters:
+        - name: userName
+          in: path
+          description: The name that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+    patch:
+      tags:
+        - user
+      summary: Modify user
+      description: Modify user
+      operationId: modifyUser
+      parameters:
+        - name: userName
+          in: path
+          description: The name that needs to be updated
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Object containing modified details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyUserDTO'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+        '400':
+          description: Invalid username supplied | invalid request body
+        '404':
+          description: User not found
+components:
+  schemas:
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        userName:
+          type: string
+          example: theUser
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: James
+        age:
+          type: integer
+          format: int32
+          example: 30
+    SubmitNewUserDTO:
+      type: object
+      properties:
+        userName:
+          type: string
+          example: Constantine
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: James
+        age:
+          type: integer
+          format: int32
+          example: 30
+    ModifyUserDTO:
+      type: object
+      properties:
+        userName:
+          type: string
+          example: Constantine
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: James
+        age:
+          type: integer
+          format: int32
+          example: 30

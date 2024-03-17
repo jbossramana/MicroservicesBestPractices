@@ -1,0 +1,82 @@
+
+Hexagonal Architecture, also known as Ports and Adapters architecture, is a software design pattern 
+that emphasizes the separation of concerns by defining clear boundaries between different parts of the 
+application. 
+
+This structure separates concerns based on the Hexagonal Architecture pattern:
+
+Ports (interfaces) define the application's capabilities without specifying implementation details.
+
+Adapters implement these ports and handle interactions with external systems or frameworks.
+
+The application service (business logic) uses the ports to interact with the domain and data access layers, 
+keeping the core logic independent of external concerns.
+
+The web layer acts as an adapter between external requests (HTTP) and the application's use cases.
+
+
+Hexagonal Architecture Principles:
+
+Core Business Logic: The core business logic of the application resides at the center of the hexagon. This logic represents
+the essential functionality that the application provides to its users or clients.
+
+Ports (Interfaces): Ports define the interactions between the core business logic and the external world. They are interfaces 
+or contracts that specify what the core logic can do or needs from the outside.
+
+Adapters: Adapters are implementations of ports. They bridge the gap between the core logic and external systems, such as 
+databases, UIs, or external services. Adapters convert external data into formats that the core logic can understand and vice versa.
+
+
+Implementation in the Code:
+
+Core Business Logic (Task Entity):
+
+In the provided code, the Task class represents the core business logic. It encapsulates the attributes and behavior of a task 
+in the task management application.
+
+Ports (TaskUseCase and TaskRepository):
+
+TaskUseCase interface defines the operations related to task use cases, such as creating tasks, retrieving tasks by ID, 
+and deleting tasks.
+
+TaskRepository interface defines the operations related to data persistence for tasks, such as saving tasks, finding tasks by ID, 
+and deleting tasks.
+
+Adapters (TaskService and TaskRepositoryAdapter):
+
+TaskService class implements the TaskUseCase interface, representing the application's use cases related to tasks. It acts as 
+an adapter between the core logic (TaskUseCase) and the infrastructure layer (TaskRepository).
+
+TaskRepositoryAdapter class implements the TaskRepository interface, providing the concrete implementation for data persistence 
+operations using specific technologies (e.g., Spring Data JPA, JDBC).
+
+
+Dependency Inversion Principle (DIP):
+
+Hexagonal Architecture follows the Dependency Inversion Principle (DIP), which states that high-level modules should not depend 
+on low-level modules but both should depend on abstractions. In the provided code, this principle is implemented through the use 
+of interfaces (TaskUseCase and TaskRepository), allowing the core logic (high-level module) to depend on abstractions rather than 
+concrete implementations.
+
+
+Separation of Concerns:
+
+Hexagonal Architecture promotes the separation of concerns by clearly defining responsibilities for different parts of the application:
+
+Core logic (Task entity, TaskUseCase): Contains business rules and use cases.
+
+Adapters (TaskService, TaskRepositoryAdapter): Handles interactions with external systems (persistence, web).
+
+Testability:
+
+By separating concerns and using interfaces, Hexagonal Architecture promotes testability. Core logic can be tested independently 
+of external dependencies by providing mock implementations for the interfaces during testing.
+
+
+
+
+
+
+
+
+

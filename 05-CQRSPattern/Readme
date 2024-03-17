@@ -1,0 +1,66 @@
+CQRS (Command Query Responsibility Segregation):
+
+CQRS is an architectural pattern that separates the responsibility of handling read operations (queries) from 
+write operations (commands) in a software application. In a CQRS-based system, the two primary components are:
+
+Command Side: This is responsible for handling commands that change the state of the system, such as creating, 
+updating, or deleting data. The command side often involves handling business logic, validating commands, and 
+generating events to represent these changes.
+
+Query Side: This side is responsible for reading data and serving queries from the system. It typically involves 
+querying a database or other data storage to retrieve information for presentation purposes.
+
+How the Example Relates to CQRS:
+
+The example provided is a simplified illustration of CQRS and event sourcing using Spring Boot. Let's break down 
+how the example relates to CQRS:
+
+Command Handling:
+
+In the example, the AccountCommandService class is responsible for handling commands. It has methods for creating 
+an account and depositing money. When you call these methods, they generate events (e.g., AccountCreatedEvent 
+and DepositEvent) representing the actions taken.
+
+Event Sourcing:
+
+Event sourcing is a key component of CQRS. In this example, the system maintains a historical log of events (e.g., account 
+creation and deposits) in the EventStore.
+Instead of directly updating the account balance, events are applied to the account to reconstruct its state. 
+The applyToBalance method in event classes specifies how the event impacts the balance.
+
+Query Handling:
+
+The AccountQueryService class handles query-related operations. It retrieves events from the EventStore for a specific 
+account and calculates the account's current balance by applying the events. This is how it separates the read and 
+write concerns.
+
+Separation of Concerns:
+
+CQRS promotes a clear separation of responsibilities between the command side and query side. In the example, 
+AccountCommandService deals with commands and event generation, while AccountQueryService deals with queries
+ and event consumption to build the read model.
+ 
+Scalability and Performance:
+
+CQRS can improve the performance and scalability of your system. You can optimize the query side independently, 
+using different data stores and query models. This flexibility allows you to scale read-heavy or write-heavy parts of 
+the application separately.
+
+Event-Driven Architecture:
+
+CQRS is often used in conjunction with event-driven architecture. In this example, events are used to record changes 
+in the system, and they can also be used to communicate updates to other parts of the application or external systems.
+
+
+Run the Application and Test:
+
+Now, when you run your Spring Boot application, the sample data will be initialized, and you can use the test endpoints 
+to interact with the system. For example:
+
+To create an account: POST /test/create?accountId=account4
+To deposit money: POST /test/deposit?accountId=account4&amount=150.0
+To check the balance: GET /test/balance?accountId=account4
+
+
+
+

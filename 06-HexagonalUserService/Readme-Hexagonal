@@ -1,0 +1,36 @@
+Hexagonal Architecture pattern, also known as Ports and Adapters. Here's an explanation 
+of each component:
+
+
+1. Application Services:
+
+This layer contains the core business logic or use cases of the application. In the diagram, it's represented by UserServiceInteractor, 
+which handles operations related to users such as creating, updating, retrieving, and deleting users.
+
+2. Domain (Core Business Logic):
+
+This layer encapsulates the domain entities, aggregates, value objects, and business rules. In the diagram, the User entity represents 
+a core domain object. It may also include other domain entities and business logic relevant to the application.
+
+
+3. Ports (Interfaces):
+
+Ports define the interfaces through which the application interacts with external systems or frameworks. In the diagram, UserRepositoryPort 
+is the interface defining methods for interacting with the user repository.
+
+4. Adapters (Implementations):
+
+Adapters provide implementations for the interfaces defined in the Ports layer. They are responsible for interacting with external systems or 
+frameworks. In the diagram, UserRepositoryAdapter provides the implementation of UserRepositoryPort using Spring Data JPA.
+
+5. Controller:
+
+The controller layer is responsible for handling incoming HTTP requests, processing them, and returning responses. In the diagram, 
+UserController serves as the controller for user-related operations, delegating requests to the UserServiceInteractor for processing.
+
+
+In summary, the Hexagonal Architecture pattern promotes a clear separation of concerns by organizing the application into layers based on 
+dependencies. The core business logic resides at the center, surrounded by layers that handle external interactions (Ports and Adapters) 
+and interfaces with the outside world (Controllers). This architecture enhances modularity, testability, and maintainability of the application.
+
+

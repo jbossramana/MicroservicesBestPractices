@@ -1,0 +1,39 @@
+The Onion Architecture, also known as Ports and Adapters architecture, is based on several key principles 
+that guide the organization and design of software systems.
+
+
+Layers of Abstraction
+
+Explanation: The Onion Architecture emphasizes organizing the codebase into concentric layers of abstraction, 
+with the core business logic at the center and infrastructure concerns at the outer layers.
+
+Implementation in the Code:
+
+1. Core Domain (Innermost Layer):
+
+The Task class in the com.example.domain package represents the core business entity.
+
+The TaskUseCase interface in the com.example.application.port package defines use case operations related to tasks, maintaining the 
+core business logic.
+
+2. Application Layer:
+
+The TaskService in the com.example.application package implements business logic using the TaskUseCase interface, focusing on 
+application-specific operations.
+
+3. Infrastructure Layer (Outermost Layer):
+
+The TaskRepository interface in the com.example.application.port package defines operations for data persistence, abstracting away
+ the details of data access.
+ 
+The TaskRepositoryImpl in the com.example.infrastructure.persistence package provides a specific implementation of the repository 
+using persistence technologies (e.g., databases).
+
+4. Presentaion Layer
+
+The presentation layer handles user interactions, renders views, and communicates with the application layer (use cases) to 
+perform business logic.
+
+
+
+

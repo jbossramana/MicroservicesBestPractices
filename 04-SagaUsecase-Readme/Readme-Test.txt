@@ -9,7 +9,7 @@ post localhost:8082/inventory
 "quantity":200
 }
 
-post  localhost:8080/order
+post  localhost:8080/orders
 
 {
 "item":"books",
@@ -21,7 +21,7 @@ post  localhost:8080/order
 
 Failure Scenario
 
-post  localhost:8080/order
+post  localhost:8080/orders
 
 {
 "item":"computer",
